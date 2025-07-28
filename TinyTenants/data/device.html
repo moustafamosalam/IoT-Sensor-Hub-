@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Info</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #f4f4f4; }
+        .container { width: 90%; max-width: 400px; padding: 20px; background: white; text-align: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        h2 { margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #007BFF; color: white; padding: 10px; margin: 5px 0; width: 100%; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+	<script>
+        function validateForm(event) {
+            let deviceName = document.querySelector("input[name='device_name']").value.trim();
+            let accessToken = document.querySelector("input[name='accessToken']").value.trim();
+
+            if (deviceName === "" || accessToken === "" || password === "") {
+                alert("All fields are required!!");
+                event.preventDefault(); // Prevent form submission
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("form").addEventListener("submit", validateForm);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Your Device Data</h2>
+        <form action="/save" method="POST">
+            <input type="text" name="device_name" placeholder="Device Name">
+            <input type="text" name="accessToken" placeholder="Access Token">
+            <button type="submit">Save & Connect</button>
+        </form>
+    </div>
+</body>
+</html>

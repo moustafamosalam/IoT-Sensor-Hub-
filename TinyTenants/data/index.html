@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WiFi Setup</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #f4f4f4; }
+        .container { width: 90%; max-width: 400px; padding: 20px; background: white; text-align: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        h2 { margin-bottom: 20px; }
+        select, input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #007BFF; color: white; padding: 10px; margin: 5px 0; width: 100%; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+    <script>
+		function scanWiFi() {
+			let select = document.getElementById('ssid');
+			
+			// Reset the dropdown before scanning
+			select.innerHTML = '<option value="" disabled selected>Searching for networks...</option>';
+
+			fetch('/scan')
+			.then(response => response.json())
+			.then(data => {
+				select.innerHTML = ''; // Clear the "Searching for networks..." text
+				if (data.length === 0) {
+					let option = document.createElement('option');
+					option.value = "";
+					option.textContent = "No networks found";
+					option.disabled = true;
+					select.appendChild(option);
+				} else {
+					data.forEach(ssid => {
+						let option = document.createElement('option');
+						option.value = ssid;
+						option.textContent = ssid;
+						select.appendChild(option);
+					});
+				}
+			})
+			.catch(() => {
+				select.innerHTML = '<option value="" disabled selected>Error scanning networks</option>';
+			});
+		}
+	</script>
+
+</head>
+<body onload="scanWiFi()">
+    <div class="container">
+        <h2>Connect to WiFi</h2>
+        <form action="/device" method="POST">
+            <select id="ssid" name="ssid">
+                <option value="" disabled selected>Searching for networks...</option>
+            </select>
+            <input type="password" name="password" placeholder="Enter WiFi Password">
+            <button type="submit">Next</button>
+        </form>
+        <button onclick="scanWiFi()">Rescan</button>
+    </div>
+</body>
+</html>
