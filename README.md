@@ -23,17 +23,6 @@ IoT Sensor Hub is a robust IoT solution that integrates an ESP8266 and an ESP32-
 - Jumper wires and breadboard for connections
 - USB cables for programming and power
 
-## Software Requirements
-- Arduino IDE or PlatformIO for programming
-- Required libraries:
-  - `ESP8266WiFi`, `ESP8266WebServer` (for ESP8266 AP and captive portal)
-  - `PubSubClient` (for MQTT communication)
-  - `ArduinoOTA` (for OTA updates)
-  - Sensor-specific libraries (e.g., `DHT` for DHT sensors)
-  - `EspSoftwareSerial` (for UART communication on ESP32-C6)
-- ThingsBoard account for MQTT broker setup
-- Arduino core for ESP8266 and ESP32 (install via Arduino IDE or PlatformIO)
-
 ## Setup Instructions
 1. **Hardware Setup**:
    - Connect the ESP32-C6 to the sensors as per their pinout requirements.
@@ -43,7 +32,7 @@ IoT Sensor Hub is a robust IoT solution that integrates an ESP8266 and an ESP32-
 2. **Software Setup**:
    - Install the Arduino IDE or PlatformIO.
    - Add ESP8266 and ESP32 board support through the Boards Manager.
-   - Install the required libraries listed above.
+   - Install the required libraries.
    - Clone or download the project repository (ensure the code is uploaded to the correct boards).
 
 3. **Configuration**:
@@ -64,25 +53,8 @@ IoT Sensor Hub is a robust IoT solution that integrates an ESP8266 and an ESP32-
    - Configure ThingsBoard for OTA updates (upload firmware binaries to the platform).
    - Trigger OTA updates for ESP8266 and ESP32-C6 through the ThingsBoard interface.
 
-## Project Structure
-- `esp8266/`: Contains code for the ESP8266 (captive portal, Wi-Fi, MQTT, OTA).
-- `esp32c6/`: Contains code for the ESP32-C6 (sensor reading, UART communication).
-- `docs/`: Additional documentation and schematics (if applicable).
-
 ## Usage
 - After setup, the system automatically collects and publishes sensor data to ThingsBoard.
 - Use the ThingsBoard dashboard to visualize sensor readings (e.g., temperature, humidity, motion events).
 - Trigger IR commands or monitor environmental changes as needed.
 - Perform OTA updates to keep the firmware up-to-date without physical access.
-
-## Troubleshooting
-- **Captive Portal Not Appearing**: Ensure the ESP8266 is in AP mode and the device is connected to the correct SSID.
-- **MQTT Connection Issues**: Verify ThingsBoard credentials and broker availability. Check Wi-Fi signal strength.
-- **Sensor Data Not Received**: Confirm UART connections and correct pin assignments in the ESP32-C6 code.
-- **OTA Update Fails**: Ensure the firmware binary is correctly uploaded to ThingsBoard and the devices are online.
-
-## Contributing
-Contributions are welcome! Please fork the repository, make changes, and submit a pull request. Ensure code follows the project’s coding style and includes relevant documentation.
-
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
